@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import AuthContext from "../../Context/AuthContext"
+import { NavLink } from "react-router-dom"
 
 function Header() {
   const { user, logout } = useContext(AuthContext)
@@ -21,12 +22,35 @@ function Header() {
           </span>
         </div>
 
-        <button
-          onClick={logout}
-          className="px-3 py-1.5 text-sm rounded-md bg-red-500/10 text-red-400 hover:bg-red-500/20 transition"
-        >
-          Logout
-        </button>
+        <div className="flex items-center gap-4">
+           <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `text-sm transition ${
+                isActive ? "text-amber-400" : "text-white/80 hover:text-white"
+              }`
+            }
+          >
+            Dashboard
+          </NavLink>
+          <NavLink
+            to="/add-job"
+            className={({ isActive }) =>
+              `text-sm transition ${
+                isActive ? "text-amber-400" : "text-white/80 hover:text-white"
+              }`
+            }
+          >
+            Add Job
+          </NavLink>
+
+          <button
+            onClick={logout}
+            className="px-3 py-1.5 text-sm rounded-md bg-red-500/10 text-red-400 hover:bg-red-500/20 transition"
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </header>
   )

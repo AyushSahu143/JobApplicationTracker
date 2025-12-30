@@ -18,10 +18,10 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#242424]">
+    <div className="min-h-screen flex items-center justify-center bg-neutral-950 text-neutral-100">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm bg-[#191919] p-6 rounded-lg shadow-lg flex flex-col gap-6"
+        className="w-full max-w-sm p-6 rounded-xl bg-neutral-900/60 border border-white/10 backdrop-blur-sm flex flex-col gap-6"
       >
         <h1 className="text-xl font-semibold text-white text-center">
           Login
@@ -30,7 +30,7 @@ function Login() {
         <div className="flex flex-col gap-2">
           <label
             htmlFor="username"
-            className="text-sm text-white/70"
+            className="text-sm text-neutral-400"
           >
             Username
           </label>
@@ -42,13 +42,13 @@ function Login() {
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter username"
             required
-            className="px-3 py-2 rounded-md bg-[#242424] text-white placeholder-white/40 outline-none border border-white/10 focus:border-amber-500"
+            className="px-3 py-2 rounded-md bg-neutral-950 text-white placeholder-white/40 outline-none border border-white/10 focus:border-amber-500"
           />
         </div>
 
         <button
           type="submit"
-          className="mt-2 py-2 rounded-md bg-amber-500 text-black font-medium hover:bg-amber-400 transition"
+          className="mt-2 py-2 rounded-md bg-amber-500/90 text-black font-medium hover:bg-amber-500 transition"
         >
           Login
         </button>
