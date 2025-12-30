@@ -99,6 +99,6 @@ B.Tech Computer Science & Engineering
 
  Email: [sahuayush134@gmail.com](#)  
  X (Twitter): [@AyushLearns](#)  
- LinkedIn: [linkedin.com/in/ayush-sahu-76550a330?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app](#)
+ LinkedIn: [linkedin.com/in/Ayush-Sahu(https://www.linkedin.com/in/ayush-sahu/)
 
 Focused on building scalable, maintainable, real-world applications with strong fundamentals in frontend and backend development.
