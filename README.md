@@ -1,16 +1,100 @@
-# React + Vite
+# Job Application Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern job application tracking dashboard built to manage, organize, and persist job applications with a clean and scalable frontend architecture.
 
-Currently, two official plugins are available:
+This application focuses on **real-world frontend engineering patterns** such as global state management, controlled forms, data persistence, guarded routes, and modular UI design — not just UI rendering.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🔐 Authentication (Fake Auth)
+- Login and logout flow
+- User-scoped session persistence using `localStorage`
+- Protected routes to prevent unauthorized access
 
-## Expanding the ESLint configuration
+### 📋 Job Management
+- Add job applications with:
+  - Company
+  - Role
+  - Status (Applied, Interview, Offer, Rejected)
+  - Notes
+- User-specific job data isolation
+- Immutable state updates for reliability
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🎨 Modern UI/UX
+- Clean, consistent dark theme
+- Card-based layout with clear visual hierarchy
+- Modal-based interaction for focused actions
+- Responsive design using Tailwind CSS
+
+### 💾 Data Persistence
+- Jobs stored per user in `localStorage`
+- Automatic state hydration on refresh
+- Predictable state flow using React Context
+
+
+## 🧠 Core Concepts & Skills Demonstrated
+
+- React Context API for global state management
+- Controlled forms and predictable state modeling
+- Separation of concerns (Layout vs Pages vs Components)
+- Conditional rendering and UI state control
+- Client-side persistence with `localStorage`
+- Route protection and navigation flow
+- Immutable state updates
+- Clean UI architecture (App Shell pattern)
+- Scalable component structure
+
+
+## 🛠 Tech Stack
+
+- **React.js**
+- **React Router**
+- **Tailwind CSS**
+- **JavaScript (ES6+)**
+- **HTML5**
+- **CSS3**
+
+
+## 📂 Project Structure (Simplified)
+
+src/
+│── components/
+│   ├── Dashboard/
+│   ├── AddJobs/
+│   ├── Header/
+│   ├── Footer/
+│── Context/
+│   ├── AuthContext
+│   ├── JobContext
+│── Layout.jsx
+│── App.jsx
+
+
+## 🎯 Why This Project Matters
+
+This project goes beyond basic CRUD demos by emphasizing:
+
+- Clear **state ownership**
+- User-scoped data persistence
+- UI consistency through a centralized layout
+- Realistic dashboard patterns used in production applications
+
+It mirrors how **internal tools and SaaS dashboards** are designed and built in real engineering teams.
+
+
+## 🚀 Future Enhancements
+
+- Edit and delete job applications
+- Search and filter by role or status
+- Dashboard analytics and summaries
+- Backend integration (Node.js + database)
+- Real authentication providers
+
+
+## 👤 Author
+
+**Ayush Sahu**  
+B.Tech Computer Science & Engineering  
+
+Focused on building scalable, maintainable, real-world applications with strong fundamentals in frontend and backend development.
