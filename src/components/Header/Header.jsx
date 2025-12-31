@@ -1,33 +1,37 @@
-import { useContext } from "react"
-import AuthContext from "../../Context/AuthContext"
-import { NavLink } from "react-router-dom"
+import { useContext } from "react";
+import AuthContext from "../../Context/AuthContext";
+import { NavLink } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
 
 function Header() {
-  const { user, logout } = useContext(AuthContext)
+  const { user, logout } = useContext(AuthContext);
 
-  if (!user) return null
+  if (!user) return null;
 
-  const initial = user.username.charAt(0).toUpperCase()
+  const initial = user.username.charAt(0).toUpperCase();
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#191919] border-b border-white/10">
-      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-        
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-amber-500 text-black flex items-center justify-center font-semibold">
+          <div className="w-9 h-9 rounded-full bg-gray-900 text-white flex items-center justify-center font-semibold text-sm">
             {initial}
           </div>
-          <span className="text-white text-sm font-medium">
+          <span className="text-gray-900 text-sm font-medium">
             {user.username}
           </span>
         </div>
 
-        <div className="flex items-center gap-4">
-           <NavLink
+        <h1 className="text-xl font-semibold text-black tracking-tight">
+          ApplyLog
+        </h1>
+
+        <div className="flex items-center gap-6">
+          <NavLink
             to="/"
             className={({ isActive }) =>
-              `text-sm transition ${
-                isActive ? "text-amber-400" : "text-white/80 hover:text-white"
+              `text-sm font-medium transition-colors ${
+                isActive ? "text-gray-900" : "text-gray-600 hover:text-gray-900"
               }`
             }
           >
@@ -36,8 +40,8 @@ function Header() {
           <NavLink
             to="/add-job"
             className={({ isActive }) =>
-              `text-sm transition ${
-                isActive ? "text-amber-400" : "text-white/80 hover:text-white"
+              `text-sm font-medium transition-colors ${
+                isActive ? "text-gray-900" : "text-gray-600 hover:text-gray-900"
               }`
             }
           >
@@ -46,14 +50,15 @@ function Header() {
 
           <button
             onClick={logout}
-            className="px-3 py-1.5 text-sm rounded-md bg-red-500/10 text-red-400 hover:bg-red-500/20 transition"
+            className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
           >
-            Logout
+            <FiLogOut className="w-4 h-4" />
+            <span>Logout</span>
           </button>
         </div>
       </div>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;

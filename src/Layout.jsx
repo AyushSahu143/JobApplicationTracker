@@ -10,9 +10,9 @@ function Layout() {
   if (!user) return <Navigate to="/login" replace />;
   return (
     <>
-      <div className="min-h-screen w-full flex flex-col bg-neutral-950 text-neutral-100 antialiased">
+      <div className="min-h-screen w-full flex flex-col bg-gray-100">
         <Header />
-        <main className="flex-1 w-full max-w-7xl mx-auto px-6 py-6">
+        <main className="flex-1 w-full max-w-7xl mx-auto px-6">
           <Outlet />
         </main>
         <Footer />

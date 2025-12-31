@@ -4,45 +4,56 @@ import authContext from "../../Context/AuthContext";
 
 function AddJobs() {
   const [fetchJob, useFetchedJob] = useState({
+    id: "",
     company: "",
     role: "",
     status: "Applied",
     note: "",
-    appliedDate: ""
+    appliedDate: "",
   });
 
-  const { setJobs } = useContext(JobContext)
-  const { user } = useContext(authContext)
+  const { setJobs } = useContext(JobContext);
+  const { user } = useContext(authContext);
 
- const handleJobs = () => {
-    e.preventDefault()
+  const handleJobs = (e) => {
+    e.preventDefault();
 
     const newJob = {
-    company: fetchJob.company,
-    role: fetchJob.role,
-    status: fetchJob.status,
-    note: fetchJob.note,
-    appliedDate: new Date().toISOString().split("T")[0]
-    }
+      id: crypto.randomUUID(),
+      company: fetchJob.company,
+      role: fetchJob.role,
+      status: fetchJob.status,
+      note: fetchJob.note,
+      appliedDate: new Date().toISOString().split("T")[0],
+    };
     setJobs((prev) => {
-        const updatedJobs = [...prev, newJob]
-        localStorage.setItem(`jobs_${user.username}`, JSON.stringify(updatedJobs))
-        return updatedJobs
-    })
+      const updatedJobs = [...prev, newJob];
+      localStorage.setItem(
+        `jobs_${user.username}`,
+        JSON.stringify(updatedJobs)
+      );
+      return updatedJobs;
+    });
 
-    //reset Job form
-    
-
- }
+    useFetchedJob({
+      company: "",
+      role: "",
+      status: "Applied",
+      note: "",
+      appliedDate: "",
+    });
+  };
 
   return (
     <>
       <form
         onSubmit={handleJobs}
-        className="max-w-lg w-full mx-auto mt-12 p-6 rounded-xl bg-neutral-900/60 border border-white/10 backdrop-blur-sm flex flex-col gap-5"
+        className="max-w-lg w-full mx-auto mt-8 p-8 rounded-lg bg-white border border-gray-200 shadow-sm flex flex-col gap-6"
       >
-        <div className="flex flex-col gap-1">
-          <label htmlFor="companyName" className="text-sm text-neutral-400">Company: </label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="companyName" className="text-sm font-medium text-gray-700">
+            Company
+          </label>
           <input
             type="text"
             id="companyName"
@@ -50,14 +61,16 @@ function AddJobs() {
             onChange={(e) =>
               useFetchedJob({ ...fetchJob, company: e.target.value })
             }
-            placeholder="company name..."
+            placeholder="Company name"
             required
-            className="px-3 py-2 rounded-md bg-neutral-950 text-white placeholder-white/40 outline-none border border-white/10 focus:border-amber-500"
+            className="px-3 py-2 rounded-md bg-white text-gray-900 placeholder-gray-400 outline-none border border-gray-300 focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="role" className="text-sm text-neutral-400">Role: </label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="role" className="text-sm font-medium text-gray-700">
+            Role
+          </label>
           <input
             type="text"
             id="role"
@@ -66,9 +79,9 @@ function AddJobs() {
             onChange={(e) =>
               useFetchedJob({ ...fetchJob, role: e.target.value })
             }
-            placeholder="set role..."
+            placeholder="Job title"
             required
-            className="px-3 py-2 rounded-md bg-neutral-950 text-white placeholder-white/40 outline-none border border-white/10 focus:border-amber-500"
+            className="px-3 py-2 rounded-md bg-white text-gray-900 placeholder-gray-400 outline-none border border-gray-300 focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
           />
           <datalist id="roles">
             <option value="SDE Intern" />
@@ -93,38 +106,46 @@ function AddJobs() {
           </datalist>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="status" className="text-sm text-neutral-400">Status:</label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="status" className="text-sm font-medium text-gray-700">
+            Status
+          </label>
           <select
             name="status"
             id="status"
             value={fetchJob.status}
-            onChange={(e) => useFetchedJob({ ...fetchJob, status: e.target.value })}
-            className="px-3 py-2 rounded-md bg-neutral-950 text-white placeholder-white/40 outline-none border border-white/10 focus:border-amber-500"
+            onChange={(e) =>
+              useFetchedJob({ ...fetchJob, status: e.target.value })
+            }
+            className="px-3 py-2 rounded-md bg-white text-gray-900 outline-none border border-gray-300 focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
           >
             <option value="Applied">Applied</option>
             <option value="Interview">Interview</option>
-            <option value=" Offer"> Offer</option>
+            <option value="Offer">Offer</option>
             <option value="Rejected">Rejected</option>
           </select>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label htmlFor="note" className="text-sm text-neutral-400">Note</label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="note" className="text-sm font-medium text-gray-700">
+            Note
+          </label>
           <textarea
             id="note"
             name="note"
             value={fetchJob.note}
-            onChange={(e) => useFetchedJob({...fetchJob, note: e.target.value})}
+            onChange={(e) =>
+              useFetchedJob({ ...fetchJob, note: e.target.value })
+            }
             placeholder="Add any notes (interview feedback, follow-up, etc.)"
             rows="4"
-            className="px-3 py-2 rounded-md bg-neutral-950 text-white placeholder-white/40 outline-none border border-white/10 focus:border-amber-500"
+            className="px-3 py-2 rounded-md bg-white text-gray-900 placeholder-gray-400 outline-none border border-gray-300 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 resize-none"
           ></textarea>
         </div>
 
         <button
           type="submit"
-          className="mt-4 w-full py-2.5 rounded-md bg-amber-500/90 text-black font-medium hover:bg-amber-500 transition"
+          className="mt-2 w-full py-2.5 rounded-md bg-gray-900 text-white font-medium hover:bg-gray-800 transition-colors"
         >
           Add Job
         </button>
