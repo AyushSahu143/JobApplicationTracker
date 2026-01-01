@@ -1,9 +1,13 @@
 import React, { useContext, useState } from "react"
 import JobContext from "../../Context/JobContext"
 import authContext from "../../Context/AuthContext"
+import { BriefcaseIcon } from '@heroicons/react/24/outline'
+import EditModals from "../EditModals/EditModals"
 
 function Dashboard() {
   const [activeStatus, setActiveStatus] = useState("ALL")
+  const [editingJob, setEditingJob] = useState(null)
+  const [isEditing, isEditingOpen] = useState(false)
   const { Jobs = [], setJobs } = useContext(JobContext)
   const { user } = useContext(authContext)
 
@@ -24,6 +28,14 @@ function Dashboard() {
       return updatedJobs;
     });
   };
+
+  const handleSaveEdit = (updatedJob) => {
+    setJobs((prev) => {
+      const updatedJobs = prev.map((job) => job.id === updatedJob.id? updatedJob : job)
+      localStorage.setItem(`jobs_${user.username}`, updatedJobs)
+      return updatedJobs
+    })
+  }
 
   return (
     <div className="w-full flex flex-col gap-8 py-8">
@@ -118,6 +130,7 @@ function Dashboard() {
         }
         {visibleJobs.length === 0 && (
           <div className="text-gray-500 border border-gray-200 rounded-lg p-12 text-center bg-white">
+            <BriefcaseIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
             No job applications found.
           </div>
         )}
@@ -185,6 +198,16 @@ function Dashboard() {
               </div>
 
               <button
+                onClick={() => {
+                  setEditingJob(job);
+                  isEditingOpen(true);
+                }}
+                className="ml-4 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 px-3 py-1.5 rounded-md transition-colors"
+              >
+                Edit
+              </button>
+
+              <button
                 onClick={() => deleteJob(job.id)}
                 className="ml-4 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 px-3 py-1.5 rounded-md transition-colors"
               >
@@ -194,6 +217,15 @@ function Dashboard() {
           </div>
         ))}
       </div>
+      {isEditing && editingJob && (
+        <EditModals
+        job={editingJob}
+        onSave={handleSaveEdit}
+        onClose={() => {
+          setEditingJob(null)
+          isEditingOpen(false)
+        }} />
+      )}
     </div>
   );
 }
