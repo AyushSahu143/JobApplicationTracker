@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { createPortal } from "react-dom";
+import { ToastContext } from "../../Context/ToastProvider";
 
 function EditModals({ job, onClose, onSave }) {
 
@@ -9,6 +10,7 @@ function EditModals({ job, onClose, onSave }) {
     status: job.status,
     note: job.note,
   });
+    const { showToasts } = useContext(ToastContext)
 
   const handleEdits = (e) => {
     e.preventDefault()
@@ -18,6 +20,7 @@ function EditModals({ job, onClose, onSave }) {
     }
     onSave(updatedJob)
     onClose()
+    showToasts("Changes saved successfully.")
   }
   return createPortal(
     <div

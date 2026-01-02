@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import JobContext from "../../Context/JobContext";
 import authContext from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { ToastContext } from "../../Context/ToastProvider";
 
 function AddJobs() {
   const [fetchJob, useFetchedJob] = useState({
@@ -16,6 +17,7 @@ function AddJobs() {
   const { setJobs } = useContext(JobContext);
   const { user } = useContext(authContext);
   const navigate = useNavigate();
+  const { showToasts } = useContext(ToastContext)
 
   const handleJobs = (e) => {
     e.preventDefault();
@@ -44,6 +46,7 @@ function AddJobs() {
       note: "",
       appliedDate: "",
     });
+    showToasts("Job application saved.")
     navigate("/")
   };
 

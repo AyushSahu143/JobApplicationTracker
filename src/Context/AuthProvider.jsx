@@ -1,9 +1,11 @@
 import authContext from "./AuthContext"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
+import { ToastContext } from "./ToastProvider"
 
 function AuthProvider({children}) {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+    const { showToasts } = useContext(ToastContext)
 
 
     useEffect(() => {
@@ -17,6 +19,7 @@ function AuthProvider({children}) {
     const logout = () => {
         localStorage.removeItem("auth_user")
         setUser(null)
+        showToasts("Signed out successfully.")
     }
   return (
     <authContext.Provider value={{user, setUser, logout, loading}}>

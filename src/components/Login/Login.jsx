@@ -1,11 +1,13 @@
 import { useContext, useState } from "react"
 import authContext from "../../Context/AuthContext"
 import { useNavigate } from "react-router-dom"
+import { ToastContext } from "../../Context/ToastProvider"
 
 function Login() {
   const { setUser } = useContext(authContext)
   const [username, setUsername] = useState("")
   const navigate = useNavigate()
+  const { showToasts } = useContext(ToastContext)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -14,6 +16,7 @@ function Login() {
     const user = { username }
     localStorage.setItem("auth_user", JSON.stringify(user))
     setUser(user)
+    showToasts("Signed in successfully.")
     navigate("/")
   }
 

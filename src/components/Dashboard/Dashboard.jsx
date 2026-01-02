@@ -4,6 +4,7 @@ import authContext from "../../Context/AuthContext";
 import { BriefcaseIcon } from "@heroicons/react/24/outline";
 import EditModals from "../EditModals/EditModals";
 import useCompanyLogo from "../../LogoCustomHook/LogoCustomHook.js";
+import { ToastContext } from "../../Context/ToastProvider.jsx";
 
 function JobLogo(job) {
   const logo = useCompanyLogo(job.company)
@@ -17,6 +18,7 @@ function Dashboard() {
   const [isEditing, isEditingOpen] = useState(false);
   const { Jobs = [], setJobs } = useContext(JobContext);
   const { user } = useContext(authContext);
+  const { showToasts } = useContext(ToastContext)
   if (!Array.isArray(Jobs)) return null;
 
   const visibleJobs =
@@ -33,6 +35,7 @@ function Dashboard() {
       );
       return updatedJobs;
     });
+    showToasts("Application removed.")
   };
 
   const handleSaveEdit = (updatedJob) => {
