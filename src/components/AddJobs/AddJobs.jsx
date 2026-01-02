@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import JobContext from "../../Context/JobContext";
 import authContext from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function AddJobs() {
   const [fetchJob, useFetchedJob] = useState({
-    id: "",
+    id: crypto.randomUUID(),
     company: "",
     role: "",
     status: "Applied",
@@ -14,6 +15,7 @@ function AddJobs() {
 
   const { setJobs } = useContext(JobContext);
   const { user } = useContext(authContext);
+  const navigate = useNavigate();
 
   const handleJobs = (e) => {
     e.preventDefault();
@@ -42,6 +44,7 @@ function AddJobs() {
       note: "",
       appliedDate: "",
     });
+    navigate("/")
   };
 
   return (

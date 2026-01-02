@@ -22,9 +22,9 @@ function Header() {
           </span>
         </div>
 
-        <h1 className="text-xl font-semibold text-black tracking-tight">
-          ApplyLog
-        </h1>
+       <h1 className="text-xl font-semibold text-black tracking-tight">
+  ApplyLog
+</h1>
 
         <div className="flex items-center gap-6">
           <NavLink

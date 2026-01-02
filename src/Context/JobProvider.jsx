@@ -15,6 +15,7 @@ function JobProvider( {children} ) {
             setJobs(JSON.parse(storedJobs))
         }
     }, [user?.username])
+
   return (
    <JobContext.Provider value={{Jobs, setJobs}}>
         {children}

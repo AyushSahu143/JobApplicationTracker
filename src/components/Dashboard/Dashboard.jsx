@@ -1,26 +1,32 @@
-import React, { useContext, useState } from "react"
-import JobContext from "../../Context/JobContext"
-import authContext from "../../Context/AuthContext"
-import { BriefcaseIcon } from '@heroicons/react/24/outline'
-import EditModals from "../EditModals/EditModals"
+import React, { useContext, useState } from "react";
+import JobContext from "../../Context/JobContext";
+import authContext from "../../Context/AuthContext";
+import { BriefcaseIcon } from "@heroicons/react/24/outline";
+import EditModals from "../EditModals/EditModals";
+import useCompanyLogo from "../../LogoCustomHook/LogoCustomHook.js";
+
+function JobLogo(job) {
+  const logo = useCompanyLogo(job.company)
+  return ( <img src={logo} className="w-8 h-8" />)
+}
+
 
 function Dashboard() {
-  const [activeStatus, setActiveStatus] = useState("ALL")
-  const [editingJob, setEditingJob] = useState(null)
-  const [isEditing, isEditingOpen] = useState(false)
-  const { Jobs = [], setJobs } = useContext(JobContext)
-  const { user } = useContext(authContext)
-
-  if (!Array.isArray(Jobs)) return null
+  const [activeStatus, setActiveStatus] = useState("ALL");
+  const [editingJob, setEditingJob] = useState(null);
+  const [isEditing, isEditingOpen] = useState(false);
+  const { Jobs = [], setJobs } = useContext(JobContext);
+  const { user } = useContext(authContext);
+  if (!Array.isArray(Jobs)) return null;
 
   const visibleJobs =
     activeStatus === "ALL"
       ? Jobs
-      : Jobs.filter((job) => job.status === activeStatus)
+      : Jobs.filter((job) => job.status === activeStatus);
 
   const deleteJob = (id) => {
     setJobs((prev) => {
-      const updatedJobs = prev.filter((job) => job.id !== id)
+      const updatedJobs = prev.filter((job) => job.id !== id);
       localStorage.setItem(
         `jobs_${user.username}`,
         JSON.stringify(updatedJobs)
@@ -31,11 +37,16 @@ function Dashboard() {
 
   const handleSaveEdit = (updatedJob) => {
     setJobs((prev) => {
-      const updatedJobs = prev.map((job) => job.id === updatedJob.id? updatedJob : job)
-      localStorage.setItem(`jobs_${user.username}`, updatedJobs)
-      return updatedJobs
-    })
-  }
+      const updatedJobs = prev.map((job) =>
+        job.id === updatedJob.id ? updatedJob : job
+      );
+      localStorage.setItem(
+        `jobs_${user.username}`,
+        JSON.stringify(updatedJobs)
+      );
+      return updatedJobs;
+    });
+  };
 
   return (
     <div className="w-full flex flex-col gap-8 py-8">
@@ -156,7 +167,8 @@ function Dashboard() {
                 <p className="flex items-center gap-3">
                   <span className="text-sm font-medium text-gray-600 min-w-[80px]">
                     Company:
-                  </span>
+                  </span>   
+                  <JobLogo job={job} />      
                   <span className="text-gray-900 font-semibold text-base">
                     {job.company}
                   </span>
@@ -219,15 +231,16 @@ function Dashboard() {
       </div>
       {isEditing && editingJob && (
         <EditModals
-        job={editingJob}
-        onSave={handleSaveEdit}
-        onClose={() => {
-          setEditingJob(null)
-          isEditingOpen(false)
-        }} />
+          job={editingJob}
+          onSave={handleSaveEdit}
+          onClose={() => {
+            setEditingJob(null);
+            isEditingOpen(false);
+          }}
+        />
       )}
     </div>
   );
 }
 
-export default Dashboard
+export default Dashboard;
