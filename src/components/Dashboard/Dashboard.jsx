@@ -37,11 +37,9 @@ function Dashboard() {
   const { Jobs = [], setJobs } = useContext(JobContext);
   const { user } = useContext(authContext);
   const { showToasts } = useContext(ToastContext);
-  const sortBtnBase =
-    "px-4 py-1.5 rounded-full text-sm font-medium transition-colors border";
+  const sortBtnBase = "px-4 py-1.5 rounded-full text-sm font-medium transition-colors border";
   const sortBtnActive = "bg-gray-900 text-white border-gray-900";
-  const sortBtnInactive =
-    "bg-white text-gray-700 border-gray-300 hover:bg-gray-50";
+  const sortBtnInactive = "bg-white text-gray-700 border-gray-300 hover:bg-gray-50";
 
   if (!Array.isArray(Jobs)) return null;
 
@@ -63,7 +61,7 @@ function Dashboard() {
 
     setTimeout(() => {
       setResetActive(false);
-    }, 1200);
+    }, 1000);
   };
 
   const visibleJobs =
