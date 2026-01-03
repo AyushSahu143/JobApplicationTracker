@@ -6,20 +6,65 @@ import EditModals from "../EditModals/EditModals";
 import useCompanyLogo from "../../LogoCustomHook/LogoCustomHook.js";
 import { ToastContext } from "../../Context/ToastProvider.jsx";
 
-function JobLogo(job) {
-  const logo = useCompanyLogo(job.company)
-  return ( <img src={logo} className="w-8 h-8" />)
+{
+  //Logo for Company
 }
+function JobLogo({ job }) {
+  const logo = useCompanyLogo(job?.company);
+  const [error, setError] = useState(false);
 
+  if (!job?.company) {
+    return <BriefcaseIcon className="w-4 h-4 text-gray-400" />;
+  }
+
+  return (
+    <img
+      src={logo}
+      alt={job.company}
+      className="w-8 h-8 object-contain rounded"
+      onError={() => setError(true)}
+      style={{ display: error ? "none" : "block" }}
+    />
+  );
+}
 
 function Dashboard() {
   const [activeStatus, setActiveStatus] = useState("ALL");
   const [editingJob, setEditingJob] = useState(null);
   const [isEditing, isEditingOpen] = useState(false);
+  const [activeSort, setActiveSort] = useState(null);
+  const [resetActive, setResetActive] = useState(false);
   const { Jobs = [], setJobs } = useContext(JobContext);
   const { user } = useContext(authContext);
-  const { showToasts } = useContext(ToastContext)
+  const { showToasts } = useContext(ToastContext);
+  const sortBtnBase =
+    "px-4 py-1.5 rounded-full text-sm font-medium transition-colors border";
+  const sortBtnActive = "bg-gray-900 text-white border-gray-900";
+  const sortBtnInactive =
+    "bg-white text-gray-700 border-gray-300 hover:bg-gray-50";
+
   if (!Array.isArray(Jobs)) return null;
+
+  const sortLatest = () => {
+    setActiveSort("latest");
+    setJobs((prev) =>
+      [...prev].sort(
+        (a, b) => new Date(b.appliedDate) - new Date(a.appliedDate)
+      )
+    );
+  };
+
+  const resetSort = () => {
+    setActiveSort(null);
+    setResetActive(true);
+    const stored = localStorage.getItem(`jobs_${user.username}`);
+    if (!stored) return;
+    setJobs(JSON.parse(stored));
+
+    setTimeout(() => {
+      setResetActive(false);
+    }, 1200);
+  };
 
   const visibleJobs =
     activeStatus === "ALL"
@@ -35,7 +80,7 @@ function Dashboard() {
       );
       return updatedJobs;
     });
-    showToasts("Application removed.")
+    showToasts("Application removed.");
   };
 
   const handleSaveEdit = (updatedJob) => {
@@ -138,6 +183,27 @@ function Dashboard() {
         </div>
       </div>
 
+      <div className="flex items-center gap-3">
+        <span className="text-sm font-medium text-gray-500">Sort</span>
+        <button
+          onClick={sortLatest}
+          className={`${sortBtnBase} ${
+            activeSort === "latest" ? sortBtnActive : sortBtnInactive
+          }`}
+        >
+          Latest
+        </button>
+
+        <button
+          onClick={resetSort}
+          className={`${sortBtnBase} ${
+            resetActive ? sortBtnActive : sortBtnInactive
+          }`}
+        >
+          Reset
+        </button>
+      </div>
+
       <div className="flex flex-col gap-3">
         {
           // Empty state text in list
@@ -170,8 +236,8 @@ function Dashboard() {
                 <p className="flex items-center gap-3">
                   <span className="text-sm font-medium text-gray-600 min-w-[80px]">
                     Company:
-                  </span>   
-                  <JobLogo job={job} />      
+                  </span>
+                  <JobLogo job={job} />
                   <span className="text-gray-900 font-semibold text-base">
                     {job.company}
                   </span>
