@@ -12,6 +12,7 @@ function AddJobs() {
     status: "Applied",
     note: "",
     appliedDate: "",
+    appliedAt: "",
   });
 
   const { setJobs } = useContext(JobContext);
@@ -29,9 +30,10 @@ function AddJobs() {
       status: fetchJob.status,
       note: fetchJob.note,
       appliedDate: new Date().toISOString().split("T")[0],
+      appliedAt: Date.now()
     };
     setJobs((prev) => {
-      const updatedJobs = [...prev, newJob];
+      const updatedJobs = [newJob, ...prev];
       localStorage.setItem(
         `jobs_${user.username}`,
         JSON.stringify(updatedJobs)

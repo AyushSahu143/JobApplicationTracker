@@ -43,11 +43,11 @@ function Dashboard() {
 
   if (!Array.isArray(Jobs)) return null;
 
-  const sortLatest = () => {
-    setActiveSort("latest");
+  const sortOldest = () => {
+    setActiveSort("oldest");
     setJobs((prev) =>
       [...prev].sort(
-        (a, b) => new Date(b.appliedDate) - new Date(a.appliedDate)
+        (a, b) => new Date(a.appliedAt) - new Date(b.appliedAt)
       )
     );
   };
@@ -184,12 +184,12 @@ function Dashboard() {
       <div className="flex items-center gap-3">
         <span className="text-sm font-medium text-gray-500">Sort</span>
         <button
-          onClick={sortLatest}
+          onClick={sortOldest}
           className={`${sortBtnBase} ${
-            activeSort === "latest" ? sortBtnActive : sortBtnInactive
+            activeSort === "oldest" ? sortBtnActive : sortBtnInactive
           }`}
         >
-          Latest
+          Oldest
         </button>
 
         <button
