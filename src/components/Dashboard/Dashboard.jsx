@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import JobContext from "../../Context/JobContext";
 import authContext from "../../Context/AuthContext";
-import { BriefcaseIcon } from "@heroicons/react/24/outline";
+import { BriefcaseIcon, PencilIcon, TrashIcon  } from "@heroicons/react/24/outline";
 import EditModals from "../EditModals/EditModals";
 import useCompanyLogo from "../../LogoCustomHook/LogoCustomHook.js";
 import { ToastContext } from "../../Context/ToastProvider.jsx";
@@ -281,16 +281,18 @@ function Dashboard() {
                   setEditingJob(job);
                   isEditingOpen(true);
                 }}
-                className="ml-4 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 px-3 py-1.5 rounded-md transition-colors"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 px-3 py-1.5 rounded-md transition-colors"
               >
-                Edit
+                <PencilIcon className="w-4 h-4" />
+                <span>Edit</span>
               </button>
 
               <button
                 onClick={() => deleteJob(job.id)}
-                className="ml-4 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 px-3 py-1.5 rounded-md transition-colors"
+                className="flex items-center gap-2 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 px-3 py-1.5 rounded-md transition-colors"
               >
-                Delete
+                <TrashIcon className="w-4 h-4" />
+                <span>Delete</span>
               </button>
             </div>
           </div>
