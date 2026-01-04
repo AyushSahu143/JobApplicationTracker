@@ -1,16 +1,28 @@
-# Job Application Tracker
+# ApplyLog – Job Application Tracker
 
-A modern job application tracking dashboard built to manage, organize, and persist job applications with a clean and scalable frontend architecture.
+A modern job application tracking dashboard designed to manage, organize, and persist job applications with a clean, scalable frontend architecture.
 
-This application focuses on **real-world frontend engineering patterns** such as global state management, controlled forms, data persistence, guarded routes, and modular UI design — not just UI rendering.
+This project focuses on **real-world frontend engineering patterns** such as global state management, protected routing, controlled forms, client-side persistence, and modular UI composition — not just UI rendering.
 
+---
+
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
+
+### Edit Job (Modal)
+![Edit Job Modal](./screenshots/EditModal.png)
+
+---
 
 ## ✨ Features
 
 ### 🔐 Authentication (Fake Auth)
-- Login and logout flow
+- Login & logout flow
 - User-scoped session persistence using `localStorage`
 - Protected routes to prevent unauthorized access
+- Automatic session hydration on refresh
 
 ### 📋 Job Management
 - Add job applications with:
@@ -18,43 +30,56 @@ This application focuses on **real-world frontend engineering patterns** such as
   - Role
   - Status (Applied, Interview, Offer, Rejected)
   - Notes
-- User-specific job data isolation
+  - Applied date
+- Edit applications using modal overlays
+- Delete applications with confirmation feedback
+- User-specific job isolation (per account)
 - Immutable state updates for reliability
 
-### 🎨 Modern UI/UX
-- Clean, consistent dark theme
-- Card-based layout with clear visual hierarchy
-- Modal-based interaction for focused actions
-- Responsive design using Tailwind CSS
+### 🔍 Sorting & Filtering
+- Filter applications by status
+- Sort applications by applied date
+- Reset sorting without mutating persisted data
+
+### 🎨 UI / UX
+- Clean, minimal light-themed interface
+- Card-based dashboard layout
+- Modal-based focused interactions
+- Toast notifications for user actions
+- Responsive design with Tailwind CSS
 
 ### 💾 Data Persistence
 - Jobs stored per user in `localStorage`
-- Automatic state hydration on refresh
-- Predictable state flow using React Context
+- Predictable state hydration on reload
+- Centralized state using React Context
 
+---
 
 ## 🧠 Core Concepts & Skills Demonstrated
 
 - React Context API for global state management
-- Controlled forms and predictable state modeling
-- Separation of concerns (Layout vs Pages vs Components)
-- Conditional rendering and UI state control
+- Custom hooks for reusable business logic
+- Controlled forms & predictable state modeling
+- Route protection & navigation flow
 - Client-side persistence with `localStorage`
-- Route protection and navigation flow
 - Immutable state updates
-- Clean UI architecture (App Shell pattern)
-- Scalable component structure
+- Modal rendering with `createPortal`
+- Conditional rendering & UI state control
+- Separation of concerns (Layout / Pages / Components)
+- Scalable component structure (App Shell pattern)
 
+---
 
 ## 🛠 Tech Stack
 
-- **React.js**
-- **React Router**
-- **Tailwind CSS**
-- **JavaScript (ES6+)**
-- **HTML5**
-- **CSS3**
+- React.js
+- React Router
+- Tailwind CSS
+- JavaScript (ES6+)
+- HTML5
+- CSS3
 
+---
 
 ## 📂 Project Structure (Simplified)
 
@@ -62,43 +87,53 @@ src/
 │── components/
 │   ├── Dashboard/
 │   ├── AddJobs/
+│   ├── EditModals/
 │   ├── Header/
 │   ├── Footer/
 │── Context/
-│   ├── AuthContext
-│   ├── JobContext
+│   ├── AuthContext.jsx
+│   ├── JobContext.jsx
+│   ├── ToastProvider.jsx
+│── LogoCustomHook/
 │── Layout.jsx
 │── App.jsx
+│── main.jsx
 
+---
 
 ## 🎯 Why This Project Matters
 
 This project goes beyond basic CRUD demos by emphasizing:
 
-- Clear **state ownership**
+- Clear state ownership
 - User-scoped data persistence
+- Guarded routes & session handling
 - UI consistency through a centralized layout
-- Realistic dashboard patterns used in production applications
+- Reusable logic via custom hooks
+- Patterns commonly used in internal tools and SaaS dashboards
 
-It mirrors how **internal tools and SaaS dashboards** are designed and built in real engineering teams.
+It mirrors how **real-world dashboards and internal products** are structured in engineering teams.
 
+---
 
 ## 🚀 Future Enhancements
 
-- Edit and delete job applications
-- Search and filter by role or status
-- Dashboard analytics and summaries
 - Backend integration (Node.js + database)
 - Real authentication providers
+- Server-side persistence
+- Advanced analytics & insights
+- Search across applications
+- Pagination & performance optimizations
 
+---
 
 ## 👤 Author
 
 **Ayush Sahu**  
 B.Tech Computer Science & Engineering  
 
- Email: [sahuayush134@gmail.com](#)  
- X (Twitter): [@AyushLearns](#)  
- LinkedIn: [linkedin.com/in/Ayush-Sahu(https://www.linkedin.com/in/ayush-sahu/)
+📧 Email: sahuayush134@gmail.com  
+🐦 X (Twitter): @AyushLearns  
+🔗 LinkedIn: https://www.linkedin.com/in/ayush-sahu/
 
-Focused on building scalable, maintainable, real-world applications with strong fundamentals in frontend and backend development.
+Focused on building **scalable, maintainable, real-world applications** with strong fundamentals in frontend and backend development.
