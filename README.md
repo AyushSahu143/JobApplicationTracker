@@ -9,10 +9,10 @@ This project focuses on **real-world frontend engineering patterns** such as glo
 ## 📸 Screenshots
 
 ### Dashboard
-![Dashboard](./screenshots/dashboard.png)
+![Dashboard](./Screenshots/Dashboard.png)
 
 ### Edit Job (Modal)
-![Edit Job Modal](./screenshots/EditModal.png)
+![Edit Job Modal](./Screenshots/EditModal.png)
 
 ---
 
