@@ -1,23 +1,33 @@
 import authContext from "./AuthContext"
 import { useEffect, useState, useContext } from "react"
 import { ToastContext } from "./ToastProvider"
+import authService from "../lib/auth"
 
 function AuthProvider({children}) {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const { showToasts } = useContext(ToastContext)
 
-
     useEffect(() => {
-        const storedUser = localStorage.getItem("auth_user")
-        if(storedUser) {
-            setUser(JSON.parse(storedUser))
+       async function checkUser() {
+        try {
+            const currentUser = await authService.getCurrentUser()
+            if(currentUser) {
+                setUser(currentUser)
+            } else {
+                setUser(null)
+            }
+        } catch (error) {
+            setUser(null)
+        } finally {
+            setLoading(false)
         }
-        setLoading(false)
+       }
+       checkUser()
     }, [])
 
-    const logout = () => {
-        localStorage.removeItem("auth_user")
+    const logout = async () => {
+        await authService.logout()
         setUser(null)
         showToasts("Signed out successfully.")
     }

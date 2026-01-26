@@ -8,9 +8,7 @@ function Footer() {
       <span className="font-medium text-gray-700">ApplyLog</span> · Track applications with clarity
     </span>
 
-    <span>
-      Data stored locally on this device
-    </span>
+    <span>Secure authentication & cloud data powered by Appwrite</span>
 
     <span>
       © {new Date().getFullYear()} Ayush Sahu

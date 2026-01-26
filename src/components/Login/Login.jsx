@@ -2,19 +2,19 @@ import { useContext, useState } from "react"
 import authContext from "../../Context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import { ToastContext } from "../../Context/ToastProvider"
+import authService from "../../lib/auth"
 
 function Login() {
   const { setUser } = useContext(authContext)
-  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const navigate = useNavigate()
   const { showToasts } = useContext(ToastContext)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!username.trim()) return
-
-    const user = { username }
-    localStorage.setItem("auth_user", JSON.stringify(user))
+    await authService.login({ email, password })
+    const user = await authService.getCurrentUser()
     setUser(user)
     showToasts("Signed in successfully.")
     navigate("/")
@@ -42,18 +42,37 @@ function Login() {
 
           <div className="flex flex-col gap-2">
             <label
-              htmlFor="username"
+              htmlFor="email"
               className="text-sm font-medium text-gray-700"
             >
-              Username
+              Email
             </label>
 
             <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter username"
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter email"
+              required
+              className="px-3 py-2 rounded-md bg-white text-gray-900 placeholder-gray-400 outline-none border border-gray-300 focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
+            />
+          </div>
+
+           <div className="flex flex-col gap-2">
+            <label
+              htmlFor="password"
+              className="text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
+
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter password"
               required
               className="px-3 py-2 rounded-md bg-white text-gray-900 placeholder-gray-400 outline-none border border-gray-300 focus:border-gray-900 focus:ring-1 focus:ring-gray-900"
             />
@@ -65,6 +84,26 @@ function Login() {
           >
             Login
           </button>
+          <div className="flex flex-col gap-2 text-sm text-gray-600 text-center">
+            <p>
+              Don't have an account?{" "}
+              <span
+                onClick={() => navigate("/signup")}
+                className="text-gray-900 font-medium cursor-pointer hover:underline"
+              >
+                Sign up
+              </span>
+            </p>
+
+            <p>
+              <span
+                onClick={() => navigate("/forgot-password")}
+                className="cursor-pointer hover:underline"
+              >
+                Forgot password?
+              </span>
+            </p>
+          </div>
         </form>
       </div>
     </div>

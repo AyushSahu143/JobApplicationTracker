@@ -8,7 +8,7 @@ function Header() {
 
   if (!user) return null;
 
-  const initial = user.username.charAt(0).toUpperCase();
+  const initial = user.name.charAt(0).toUpperCase();
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200">
